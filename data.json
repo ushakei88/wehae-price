@@ -1,0 +1,144 @@
+{
+ "updatedAt": "2026-11-25T08:55:00+09:00",
+ "minPrice": 24000,
+ "badCount": 6,
+ "items": [
+  {
+   "bad": true,
+   "mall": "옥션",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 19240,
+   "unit": 19240,
+   "diff": -4760,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": true,
+   "mall": "G마켓",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 19250,
+   "unit": 19250,
+   "diff": -4750,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": true,
+   "mall": "11번가",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 19660,
+   "unit": 19660,
+   "diff": -4340,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": true,
+   "mall": "이마트인터넷쇼핑몰",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 20260,
+   "unit": 20260,
+   "diff": -3740,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": true,
+   "mall": "SSG.COM",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 20260,
+   "unit": 20260,
+   "diff": -3740,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": true,
+   "mall": "신세계몰",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 20260,
+   "unit": 20260,
+   "diff": -3740,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": false,
+   "mall": "G마켓",
+   "title": "WEHAE 위해 홍삼 스틱 분말 글로우 샷 20포 (20일치)",
+   "price": 25500,
+   "unit": 25500,
+   "diff": 1500,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": false,
+   "mall": "옥션",
+   "title": "WEHAE 위해 홍삼 스틱 분말 글로우 샷 20포 (20일치)",
+   "price": 25500,
+   "unit": 25500,
+   "diff": 1500,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": false,
+   "mall": "롯데ON",
+   "title": "위해 [WEHAE] 위해 홍삼 스틱 분말 글로우 샷 20포 (20일치)",
+   "price": 25500,
+   "unit": 25500,
+   "diff": 1500,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  }
+ ],
+ "history": [
+  {
+   "at": "2026-11-25T08:55:00+09:00",
+   "mall": "옥션",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 19240,
+   "unit": 19240,
+   "diff": -4760,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "at": "2026-11-25T08:55:00+09:00",
+   "mall": "G마켓",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 19250,
+   "unit": 19250,
+   "diff": -4750,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "at": "2026-11-25T08:55:00+09:00",
+   "mall": "11번가",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 19660,
+   "unit": 19660,
+   "diff": -4340,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "at": "2026-11-25T08:55:00+09:00",
+   "mall": "이마트인터넷쇼핑몰",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 20260,
+   "unit": 20260,
+   "diff": -3740,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "at": "2026-11-25T08:55:00+09:00",
+   "mall": "SSG.COM",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 20260,
+   "unit": 20260,
+   "diff": -3740,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "at": "2026-11-25T08:55:00+09:00",
+   "mall": "신세계몰",
+   "title": "위해 홍삼 글로우 샷 20포 (20일치)",
+   "price": 20260,
+   "unit": 20260,
+   "diff": -3740,
+   "link": "https://search.danawa.com/dsearch.php?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  }
+ ]
+}

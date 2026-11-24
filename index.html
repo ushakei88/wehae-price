@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#14161a">
+<title>위해 최저가 모니터링</title>
+<style>
+  :root{--bg:#f4f5f7;--card:#fff;--ink:#16181d;--sub:#6b7280;--line:#e5e7eb;--red:#d93025;--redbg:#fdecea;--green:#188038;--greenbg:#e6f4ea;--accent:#14161a}
+  @media (prefers-color-scheme:dark){:root{--bg:#0f1114;--card:#1a1d22;--ink:#eef0f3;--sub:#9aa1ab;--line:#2a2e35;--redbg:#3a1a18;--greenbg:#16301f;--red:#ff6b5e;--green:#5cc98a}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);padding:env(safe-area-inset-top) 0 40px;-webkit-font-smoothing:antialiased}
+  header{background:var(--accent);color:#fff;padding:20px 18px 18px}
+  header h1{font-size:19px;font-weight:700;letter-spacing:-.3px}
+  header p{font-size:12.5px;opacity:.7;margin-top:4px}
+  .wrap{max-width:720px;margin:0 auto;padding:0 14px}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:-12px 0 14px}
+  .kpi{background:var(--card);border-radius:14px;padding:12px 12px 11px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .kpi b{display:block;font-size:20px;font-weight:800;letter-spacing:-.5px;margin-top:3px}
+  .kpi span{font-size:11.5px;color:var(--sub)}
+  .kpi.alert{background:var(--red);color:#fff}.kpi.alert span{color:#fff;opacity:.85}
+  .kpi.ok b{color:var(--green)}
+  .banner{border-radius:14px;padding:13px 15px;font-size:14px;font-weight:600;margin-bottom:14px;line-height:1.45}
+  .banner.bad{background:var(--redbg);color:var(--red)}
+  .banner.good{background:var(--greenbg);color:var(--green)}
+  .tabs{display:flex;gap:6px;margin-bottom:10px}
+  .tab{flex:1;border:0;background:var(--card);color:var(--sub);font-size:13.5px;font-weight:600;padding:10px 0;border-radius:10px;cursor:pointer}
+  .tab.on{background:var(--accent);color:#fff}
+  @media (prefers-color-scheme:dark){.tab.on{background:#eef0f3;color:#111}}
+  .item{display:block;background:var(--card);border-radius:14px;padding:13px 14px;margin-bottom:8px;text-decoration:none;color:inherit;border-left:5px solid transparent}
+  .item.bad{border-left-color:var(--red)}
+  .item.ok{border-left-color:var(--green)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .mall{font-size:13px;font-weight:700}
+  .badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap}
+  .badge.bad{background:var(--redbg);color:var(--red)}
+  .badge.ok{background:var(--greenbg);color:var(--green)}
+  .title{font-size:12.5px;color:var(--sub);margin:5px 0 8px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .price{font-size:19px;font-weight:800;letter-spacing:-.4px}
+  .price small{font-size:12px;font-weight:500;color:var(--sub);margin-left:4px}
+  .diff{font-size:13px;font-weight:700}
+  .diff.bad{color:var(--red)}.diff.ok{color:var(--green)}
+  .when{font-size:11.5px;color:var(--sub)}
+  .empty,.err{text-align:center;color:var(--sub);font-size:14px;padding:40px 10px;line-height:1.6}
+  .err{color:var(--red)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:12px;color:var(--sub)}
+  .foot button{border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:12.5px;padding:7px 12px;border-radius:9px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>위해 홍삼 글로우샷 · 최저가 모니터링</h1>
+    <p id="sub">불러오는 중…</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="kpis">
+    <div class="kpi" id="k-bad"><span>기준가 미만</span><b>–</b></div>
+    <div class="kpi"><span>기준가</span><b id="k-min">–</b></div>
+    <div class="kpi"><span>현재 최저가</span><b id="k-low">–</b></div>
+  </div>
+
+  <div id="banner"></div>
+
+  <div class="tabs">
+    <button class="tab on" data-v="bad">위반만</button>
+    <button class="tab" data-v="all">전체 판매처</button>
+    <button class="tab" data-v="hist">감지 이력</button>
+  </div>
+
+  <div id="list"></div>
+
+  <div class="foot">
+    <span id="next">평일 9·12·15·18시 갱신</span>
+    <button id="reload">지금 새로고침</button>
+  </div>
+</div>
+
+<script>
+// 같은 저장소의 data.json (Claude 예약작업이 하루 4번 갱신)
+const API_URL = 'data.json';
+const REFRESH_MIN = 5;
+
+let data = null, view = 'bad';
+const $ = id => document.getElementById(id);
+const won = n => (Number(n) || 0).toLocaleString('ko-KR') + '원';
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = iso => {
+  if (!iso) return '-';
+  const d = new Date(iso); if (isNaN(d)) return iso;
+  return d.toLocaleString('ko-KR', {month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'});
+};
+
+async function load() {
+  try {
+    const res = await fetch(API_URL + '?t=' + Date.now());
+    data = await res.json();
+    render();
+  } catch (e) {
+    $('list').innerHTML = '<div class="err">데이터를 불러오지 못했어요.<br>잠시 후 다시 시도해 주세요.</div>';
+  }
+}
+
+function render() {
+  const items = data.items || [];
+  const bad = items.filter(i => i.bad);
+  const low = items.length ? Math.min(...items.map(i => Number(i.unit) || Infinity)) : null;
+
+  $('sub').textContent = '마지막 확인 ' + fmt(data.updatedAt) + ' · 판매처 ' + items.length + '곳';
+  const kb = $('k-bad');
+  kb.querySelector('b').textContent = bad.length + '건';
+  kb.className = 'kpi ' + (bad.length ? 'alert' : 'ok');
+  $('k-min').textContent = won(data.minPrice);
+  $('k-low').textContent = low && isFinite(low) ? won(low) : '-';
+
+  $('banner').innerHTML = bad.length
+    ? `<div class="banner bad">⚠️ ${bad.length}곳이 기준가(${won(data.minPrice)}) 밑으로 노출 중이에요. 눌러서 해당 판매처로 이동 후 조치해 주세요.</div>`
+    : `<div class="banner good">✅ 모든 판매처가 기준가 이상이에요.</div>`;
+
+  document.title = (bad.length ? `(${bad.length}) ` : '') + '위해 최저가 모니터링';
+
+  let html = '';
+  if (view === 'hist') {
+    const h = data.history || [];
+    html = h.length ? h.map(r => `
+      <a class="item bad" href="${esc(r.link)}" target="_blank" rel="noopener">
+        <div class="row"><span class="mall">${esc(r.mall)}</span><span class="when">${fmt(r.at)}</span></div>
+        <div class="title">${esc(r.title)}</div>
+        <div class="row"><span class="price">${won(r.unit)}</span><span class="diff bad">${won(r.diff)}</span></div>
+      </a>`).join('') : '<div class="empty">아직 감지 이력이 없어요.</div>';
+  } else {
+    const list = view === 'bad' ? bad : items;
+    html = list.length ? list.map(i => {
+      const k = i.bad ? 'bad' : 'ok';
+      const multi = Number(i.price) !== Number(i.unit) ? `<small>노출 ${won(i.price)}</small>` : '';
+      return `
+      <a class="item ${k}" href="${esc(i.link)}" target="_blank" rel="noopener">
+        <div class="row"><span class="mall">${esc(i.mall)}</span><span class="badge ${k}">${i.bad ? '기준가 미만' : '정상'}</span></div>
+        <div class="title">${esc(i.title)}</div>
+        <div class="row"><span class="price">${won(i.unit)}${multi}</span>
+          <span class="diff ${k}">${Number(i.diff) >= 0 ? '+' : ''}${won(i.diff)}</span></div>
+      </a>`;
+    }).join('') : `<div class="empty">${view === 'bad' ? '기준가 미만 판매처가 없어요 👍' : '수집된 판매처가 없어요.'}</div>`;
+  }
+  $('list').innerHTML = html;
+}
+
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); view = b.dataset.v; if (data) render();
+});
+$('reload').onclick = load;
+load();
+setInterval(load, REFRESH_MIN * 60 * 1000);
+</script>
+</body>
+</html>
