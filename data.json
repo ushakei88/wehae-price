@@ -1,7 +1,7 @@
 {
  "updatedAt": "2026-11-25T08:55:00+09:00",
  "minPrice": 24000,
- "badCount": 6,
+ "badCount": 7,
  "items": [
   {
    "bad": true,
@@ -56,6 +56,15 @@
    "unit": 20260,
    "diff": -3740,
    "link": "https://shinsegaemall.ssg.com/search.ssg?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "bad": true,
+   "mall": "쿠팡",
+   "title": "[WEHAE] 위해 홍삼 스틱 분말 글로우 샷 20포",
+   "price": 23200,
+   "unit": 23200,
+   "diff": -800,
+   "link": "https://www.coupang.com/np/search?q=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
   },
   {
    "bad": false,
@@ -139,6 +148,15 @@
    "unit": 20260,
    "diff": -3740,
    "link": "https://shinsegaemall.ssg.com/search.ssg?query=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
+  },
+  {
+   "at": "2026-11-25T08:55:00+09:00",
+   "mall": "쿠팡",
+   "title": "[WEHAE] 위해 홍삼 스틱 분말 글로우 샷 20포",
+   "price": 23200,
+   "unit": 23200,
+   "diff": -800,
+   "link": "https://www.coupang.com/np/search?q=%EC%9C%84%ED%95%B4%20%ED%99%8D%EC%82%BC%20%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%83%B7"
   }
  ]
 }
