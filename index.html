@@ -80,8 +80,8 @@
 </div>
 
 <script>
-// 같은 저장소의 data.json (Claude 예약작업이 하루 4번 갱신)
-const API_URL = 'data.json';
+// 구글시트(Apps Script)에서 최신 결과를 바로 읽음. 비어 있으면 data.json으로 대체
+const API_URL = 'https://script.google.com/macros/s/AKfycbwXzbocnHeHa7p8dN_Q0erQ-OMfQurdmVa6GvuzLr_AiDGGqN8MHlweVgZf_Ovod1mqlw/exec';
 const REFRESH_MIN = 5;
 
 let data = null, view = 'bad';
@@ -98,6 +98,7 @@ async function load() {
   try {
     const res = await fetch(API_URL + '?t=' + Date.now());
     data = await res.json();
+    if (!data.items || !data.items.length) data = await (await fetch('data.json?t=' + Date.now())).json();
     render();
   } catch (e) {
     $('list').innerHTML = '<div class="err">데이터를 불러오지 못했어요.<br>잠시 후 다시 시도해 주세요.</div>';
